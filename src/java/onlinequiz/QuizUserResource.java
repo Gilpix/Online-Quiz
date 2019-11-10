@@ -67,9 +67,9 @@ public class QuizUserResource {
     
     
     @GET
-    @Path("addUser&{USERID}&{FNAME}&{LNAME}&{PASSWORD}")
+    @Path("registerUser&{USERID}&{FNAME}&{LNAME}&{PASSWORD}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String addUser(@PathParam("USERID") String user_id, @PathParam("FNAME") String fname, @PathParam("LNAME") String lname, @PathParam("PASSWORD") String password) {
+    public String registerUser(@PathParam("USERID") String user_id, @PathParam("FNAME") String fname, @PathParam("LNAME") String lname, @PathParam("PASSWORD") String password) {
         
         Connection conn = null;
               conn=  databaseConn.getConnection(conn);
@@ -123,9 +123,9 @@ public class QuizUserResource {
     
     
      @GET
-            @Path("getUserList")
+            @Path("usersList")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUserList() {
+    public String usersList() {
         
         
         Connection conn = null;
@@ -196,9 +196,9 @@ public class QuizUserResource {
     
     
       @GET
-            @Path("getSingleUser&{USERID}&{PASSWORD}")
+            @Path("userProfile&{USERID}&{PASSWORD}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getSingleUser(@PathParam("USERID") String usr_id,@PathParam("PASSWORD") String usr_password) {
+    public String userProfile(@PathParam("USERID") String usr_id,@PathParam("PASSWORD") String usr_password) {
         
         
         JSONObject singleUser =new JSONObject();
@@ -229,11 +229,11 @@ public class QuizUserResource {
     String user_fname = rs.getString("FNAME");
     String user_lname = rs.getString("LNAME");
      //String user_password = rs.getString("PASSWORD");
-     String userName=user_fname.substring(0,1)+user_lname;
+     //String userName=user_fname.substring(0,1)+user_lname;
 //Display values
     singleUser.accumulate("status", "ok");
         singleUser.accumulate("Timestamp", timeStamp);
-          singleUser.accumulate("USERNAME", userName);
+          //singleUser.accumulate("USERNAME", userName);
      singleUser.accumulate("USERID", user_id);
         singleUser.accumulate("FNAME", user_fname);
           singleUser.accumulate("LNAME", user_lname);
