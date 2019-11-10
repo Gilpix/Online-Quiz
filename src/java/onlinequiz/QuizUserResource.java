@@ -180,7 +180,7 @@ public class QuizUserResource {
                    
              mainObject.accumulate("Status", "error");
         mainObject.accumulate("Timestamp", timeStamp);
-        mainObject.accumulate("Msg",  Message);
+        //mainObject.accumulate("Msg",  Message);
        }
        
  
