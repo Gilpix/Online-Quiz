@@ -31,7 +31,7 @@ import net.sf.json.JSONObject;
 public class QuizUserResource {
     
     
-    String msg; 
+    String Message; 
  Date today=new Date();
  long timeStamp=today.getTime();
  JSONArray mainArray=new JSONArray();
@@ -100,7 +100,7 @@ public class QuizUserResource {
                   databaseConn.closeConnection(conn,null,stm);
             
         } catch (SQLException ex) {
-            msg=ex.getMessage();
+            Message=ex.getMessage();
         }
         
          if(qRes!=1)
@@ -108,7 +108,7 @@ public class QuizUserResource {
             mainObject.clear();
         mainObject.accumulate("Status", "error");
         mainObject.accumulate("Timestamp", timeStamp);
-        mainObject.accumulate("Msg", "Not Inserted - "+ msg);
+        mainObject.accumulate("Msg", "Not Inserted - "+ Message);
        }
          
          return mainObject.toString();
@@ -170,19 +170,19 @@ public class QuizUserResource {
      databaseConn.closeConnection(conn,rs,stm);
             
         } catch (Exception ex) {
-            msg=ex.getMessage();
+            Message=ex.getMessage();
         }
         
-        if(mainArray.isEmpty()||msg!=null)
+        if(mainArray.isEmpty()||Message!=null)
         {
             mainObject.clear();
               
-               if(mainArray.isEmpty() && msg==null)
-                  msg="Main array is empty";
+               if(mainArray.isEmpty() && Message==null)
+                  Message="Main array is empty";
                    
              mainObject.accumulate("Status", "error");
         mainObject.accumulate("Timestamp", timeStamp);
-        mainObject.accumulate("Msg",  msg);
+        mainObject.accumulate("Msg",  Message);
        }
        
  
@@ -234,9 +234,9 @@ public class QuizUserResource {
     singleUser.accumulate("status", "ok");
         singleUser.accumulate("Timestamp", timeStamp);
           //singleUser.accumulate("USERNAME", userName);
-     singleUser.accumulate("USERID", user_id);
-        singleUser.accumulate("FNAME", user_fname);
-          singleUser.accumulate("LNAME", user_lname);
+     singleUser.accumulate("UserID", user_id);
+        singleUser.accumulate("Fname", user_fname);
+          singleUser.accumulate("Lname", user_lname);
           //singleUser.accumulate("PASSWORD", user_password);
      
     }
@@ -245,21 +245,21 @@ public class QuizUserResource {
 
         }
         catch (SQLException ex) {
-                       msg=ex.getMessage();
+                       Message=ex.getMessage();
                       
                     } catch (Exception ex) {
-              msg=ex.getMessage();
+              Message=ex.getMessage();
           }
  
         if(singleUser.toString().equals("{}"))
         {
-              if(msg==null)
-               msg="ID - '"+usr_id+"' Record not found";
+              if(Message==null)
+               Message=" Record not found";
                    
              singleUser.accumulate("Status", "error");
         singleUser.accumulate("Timestamp", timeStamp);
-         singleUser.accumulate("USERID", usr_id);
-        singleUser.accumulate("Msg",  msg);
+         singleUser.accumulate("UserID", usr_id);
+        singleUser.accumulate("Message",  Message);
        }
         
          return singleUser.toString();
