@@ -130,13 +130,12 @@ public class QuizUserResource {
         
         Connection conn = null;
               conn=  databaseConn.getConnection(conn);
-              JSONObject singleJob=new JSONObject();
-              String userName="";
+              JSONObject singleUser=new JSONObject();
          
          
         try {
                    String sql;
-                sql = "SELECT USERID,FNAME,LNAME,PASSWORD FROM QUIZUSER";
+                sql = "SELECT USERID,FNAME,LNAME FROM QUIZUSER";
     
              PreparedStatement stm = conn.prepareStatement(sql);
                 ResultSet rs=stm.executeQuery();
@@ -149,22 +148,21 @@ public class QuizUserResource {
     String user_id = rs.getString("USERID");
     String user_fname = rs.getString("FNAME");
     String user_lname = rs.getString("LNAME");
-     String user_password = rs.getString("PASSWORD");
-     userName=user_fname.substring(0,1)+user_lname;
+     //String user_password = rs.getString("PASSWORD");
+     //userName=user_fname.substring(0,1)+user_lname;
 //Display values
 
-      singleJob.accumulate("USERNAME", userName);
-     singleJob.accumulate("USERID", user_id);
-        singleJob.accumulate("FNAME", user_fname);
-          singleJob.accumulate("LNAME", user_lname);
-          singleJob.accumulate("PASSWORD",user_password.substring(0, 1)+"*****"+user_password.substring(user_password.length()-1));
-        mainArray.add(singleJob);
-        singleJob.clear();
+     singleUser.accumulate("UserID", user_id);
+        singleUser.accumulate("Fname", user_fname);
+          singleUser.accumulate("Lname", user_lname);
+          //singleJob.accumulate("PASSWORD",user_password.substring(0, 1)+"*****"+user_password.substring(user_password.length()-1));
+        mainArray.add(singleUser);
+        singleUser.clear();
 
     }
      mainObject.accumulate("status", "ok");
         mainObject.accumulate("Timestamp", timeStamp);
-    mainObject.accumulate("Users", mainArray);
+    mainObject.accumulate("UsersList", mainArray);
     
     
      databaseConn.closeConnection(conn,rs,stm);
